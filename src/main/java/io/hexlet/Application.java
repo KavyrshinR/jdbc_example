@@ -41,9 +41,4 @@ public class Application {
         // Закрываем соединение
         conn.close();
     }
-
-//    BigDecimal sal = new BigDecimal("153833.00");
-//    PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEES SET SALARY = ? WHERE ID = ?");
-//    pstmt.setBigDecimal(1, sal);
-//    pstmt.setInt(2, 110592);
 }
