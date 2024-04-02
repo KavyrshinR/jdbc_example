@@ -26,15 +26,31 @@ public class Application {
             statement2.executeUpdate(sql2);
         }
 
-        var sql3 = "SELECT * FROM users";
+        var sqlInsertData2 = "INSERT INTO users (username, phone) VALUES (?, ?);";
+        try (var preparedStatement = conn.prepareStatement(sqlInsertData2)) {
+            preparedStatement.setString(1, "Ivan");
+            preparedStatement.setString(2, "+7111111");
+            preparedStatement.executeUpdate();
+
+            preparedStatement.setString(1, "Viktor");
+            preparedStatement.setString(2, "+7222222");
+            preparedStatement.executeUpdate();
+        }
+
+        var sqlDeleteUserByNameSql = "DELETE FROM users WHERE username = ?;";
+        try (var preparedStatement = conn.prepareStatement(sqlDeleteUserByNameSql)) {
+            preparedStatement.setString(1, "Viktor");
+            preparedStatement.executeUpdate();
+        }
+
+        var sqlSelectAll = "SELECT * FROM users";
         try(var statement3 = conn.createStatement()) {
             // Здесь вы видите указатель на набор данных в памяти СУБД
-            var resultSet = statement3.executeQuery(sql3);
+            var resultSet = statement3.executeQuery(sqlSelectAll);
             // Набор данных — это итератор
             // Мы перемещаемся по нему с помощью next() и каждый раз получаем новые значения
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("username"));
-                System.out.println(resultSet.getString("phone"));
+                System.out.println(resultSet.getString("username") + " " + resultSet.getString("phone"));
             }
         }
 
