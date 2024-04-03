@@ -37,6 +37,7 @@ public class Application {
         foundUser.ifPresent((it) -> {
             try {
                 System.out.println("delete by id " + it.getId() + " = " + userDao.deleteById(it.getId()));
+                System.out.println("delete by id " + it.getId() + " = " + userDao.deleteById(it.getId()));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -44,6 +45,7 @@ public class Application {
 
         printUsers(userDao.getAllUsers());
 
+        System.out.println("delete by username " + "Василий" + " = " + userDao.deleteByUsername("Василий"));
         System.out.println("delete by username " + "Василий" + " = " + userDao.deleteByUsername("Василий"));
 
         printUsers(userDao.getAllUsers());
